@@ -13,24 +13,23 @@ function App() {
   var channel = pusher.subscribe('my-channel');
 
   const [type, setType] = useState('');
-
   const [backgroundImageUrl, setBackgroundImageUrl] = useState('');
+  const [isDbUpdated, setIsDbUpdated] = useState(false);
 
   function sendNotification(task) {
-
-    if ('Notification' in window) {
-      if (Notification.permission === 'granted') {
-        new Notification(task.value);
-      } else if (Notification.permission !== 'denied') {
-        Notification.requestPermission().then(permission => {
-          if (permission === 'granted') {
-            new Notification(task.value);
-          }
-        });
-      }
-    }
+    console.log('Notification')
+    // if ('Notification' in window) {
+    //   if (Notification.permission === 'granted') {
+    //     new Notification(task.value);
+    //   } else if (Notification.permission !== 'denied') {
+    //     Notification.requestPermission().then(permission => {
+    //       if (permission === 'granted') {
+    //         new Notification(task.value);
+    //       }
+    //     });
+    //   }
+    // }
   }
-
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -48,13 +47,23 @@ function App() {
 
   useEffect(() => {
     channel.bind('my-event', function (data) {
-      sendNotification(data.data);
+      console.log('TYPE : ', data.data.type)
+      if (data.data.type === "change") {
+        console.log('CHANGE')
+        setIsDbUpdated(!isDbUpdated);
+      } else {
+        sendNotification(data.data);
+      }
     });
   }, [])
 
   useEffect(() => {
     getBackgroundImageUrl(setBackgroundImageUrl);
   }, [backgroundImageUrl])
+
+  useEffect(() => {
+    console.log('isDbUpdated : ', isDbUpdated)
+  }, [isDbUpdated])
 
   return (
     <div className="app">
@@ -67,6 +76,7 @@ function App() {
         setType={setType}
         setBackgroundImageUrl={setBackgroundImageUrl}
         backgroundImageUrl={backgroundImageUrl}
+        isDbUpdated={isDbUpdated}
       />
 
       <Footer />

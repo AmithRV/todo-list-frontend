@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import { getTodoList, removeItemFromList, updatListItem } from "../helpers/request";
 import Detailspage from "./Detailspage";
 
-function Body({ type, setType, setBackgroundImageUrl, backgroundImageUrl }) {
+function Body({ type, setType, setBackgroundImageUrl, backgroundImageUrl, isDbUpdated }) {
 
     const [list, setList] = useState([]);
     const [refresh, setRefresh] = useState(false);
@@ -41,8 +41,9 @@ function Body({ type, setType, setBackgroundImageUrl, backgroundImageUrl }) {
     }
 
     useEffect(() => {
+        console.log('isDbUpdated : ', isDbUpdated)
         getTodoList(setLoading, setList);
-    }, [refresh])
+    }, [refresh, isDbUpdated])
 
     return (
         <>
