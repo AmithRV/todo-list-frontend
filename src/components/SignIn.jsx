@@ -14,7 +14,7 @@ function SignIn({ userValidationUpdated, setUserValidationUpdated }) {
   return (
     <div className='sign-in-wrap'>
       <div className='sign-in-options'>
-        <label style={{ marginLeft: '25px' }}>USER ID</label>
+        <label className='sign-in-option-label'>USER ID</label>
         <input
           className='sign-in-action-input'
           value={userId ? userId : ''}
@@ -25,7 +25,7 @@ function SignIn({ userValidationUpdated, setUserValidationUpdated }) {
       </div>
 
       <div className='sign-in-options'>
-        <label>PASSWORD</label>
+        <label className='sign-in-option-label'>PASSWORD</label>
         <input
           className='sign-in-action-input'
           value={password ? password : ''}

@@ -443,3 +443,6 @@ html {
   cursor: pointer;
 }
 
+.sign-in-option-label{
+  width:70px
+}
