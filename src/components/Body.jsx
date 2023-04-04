@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import HashModal from "./HashModal";
+import Modal from "./Modal";
 import { ToastContainer } from 'react-toastify';
 import { getBackgroundImageUrl, getTodoList, handleNotification, removeItemFromList } from "../helpers/request";
 import Detailspage from "./Detailspage";
@@ -82,7 +82,7 @@ function Body({ type, setType, userValidationUpdated, isValidUser, setUserValida
                                                         className={(item?.isCompleted) ? ("checkbox-label-line-through") : ("checkbox-label")}
                                                         onClick={() => {
                                                             setIsDetailsVisible(true);
-                                                            setTaskId(item?.id);
+                                                            setTaskId(item?._id);
                                                         }}
                                                     >
                                                         {item?.value}
@@ -94,7 +94,7 @@ function Body({ type, setType, userValidationUpdated, isValidUser, setUserValida
                                                                 <img
                                                                     src="./icons/check.svg"
                                                                     className="check-icon action-icon"
-                                                                    onClick={() => { removeItem(item?.id) }}
+                                                                    onClick={() => { removeItem(item?._id) }}
                                                                     alt={'icon'}
                                                                 />
                                                                 <img
@@ -134,7 +134,7 @@ function Body({ type, setType, userValidationUpdated, isValidUser, setUserValida
 
             {
                 (type === 'decrypt' || type === 'add' || type === 'chang-bg-image') &&
-                <HashModal
+                <Modal
                     type={type}
                     setType={setType}
                     setList={setList}

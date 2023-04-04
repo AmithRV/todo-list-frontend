@@ -3,7 +3,7 @@ import { addBackgroundImage, addTasktoList } from "../helpers/request";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-function HashModal({ type, setType, setList, todoList, setBackgroundImageUrl, callBack }) {
+function Modal({ type, setType, setList, todoList, setBackgroundImageUrl, callBack }) {
 
     const [inputValue, setInputValue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -18,7 +18,7 @@ function HashModal({ type, setType, setList, todoList, setBackgroundImageUrl, ca
         } else {
             const data = {
                 data: {
-                    id: todoList?.length + 1,
+                    // id: todoList?.length + 1,
                     value: inputValue,
                     description: description,
                     isCompleted: false,
@@ -169,4 +169,4 @@ function HashModal({ type, setType, setList, todoList, setBackgroundImageUrl, ca
     )
 }
 
-export default HashModal;
+export default Modal;
