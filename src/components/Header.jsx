@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import { removeDataFromLocalStorage } from "../helpers/actions";
 
-function Header({ setType }) {
+function Header({ setType, userValidationUpdated, setUserValidationUpdated, isValidUser }) {
     const ref = useRef(null);
     const [isMenuVisible, setIsMenuVisible] = useState(false);
 
@@ -28,17 +29,22 @@ function Header({ setType }) {
                     </div>
 
                     <div className="settings">
-                        <img
-                            src="./icons/settings.svg"
-                            onClick={() => { setIsMenuVisible(!isMenuVisible) }}
-                            alt={'icon'}
-                        />
+                        {
+                            (isValidUser) ? (
+                                <img
+                                    src="./icons/settings.svg"
+                                    onClick={() => { setIsMenuVisible(!isMenuVisible) }}
+                                    alt={'icon'}
+                                />
+                            ) : (<></>)
+                        }
+
                     </div>
                 </div>
             </div>
 
             {
-                (isMenuVisible) ? (
+                (isMenuVisible && isValidUser) ? (
                     <div className="menu-wrap" ref={ref}>
                         <div className="menu">
                             <span
@@ -70,6 +76,17 @@ function Header({ setType }) {
                                 }}
                             >
                                 Change background
+                            </span>
+
+                            <span
+                                className="menu-item"
+                                onClick={() => {
+                                    setUserValidationUpdated(!userValidationUpdated)
+                                    removeDataFromLocalStorage();
+                                    setIsMenuVisible(false);
+                                }}
+                            >
+                                sign out
                             </span>
                         </div>
                     </div>

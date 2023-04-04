@@ -1,5 +1,9 @@
 import { toast } from 'react-toastify';
 import axios from '../helpers/axios';
+import Pusher from 'pusher-js';
+
+const pusher = new Pusher('100e80424f5d4e59467f', { cluster: 'ap2' });
+const channel = pusher.subscribe('my-channel');
 
 const getTodoList = (setLoading, setList) => {
     setLoading(true);
@@ -25,17 +29,21 @@ const addTasktoList = (data, setType) => {
         })
 }
 
-const updatListItem = (itemId, isCompleted) => {
-
+const updatListItem = (itemId, isCompleted, onUpdate, setIsUpdating) => {
+    setIsUpdating(true);
+    
     axios.patch('/update-item', {
         data: {
             id: itemId,
-            isCompleted: !isCompleted
+            isCompleted: isCompleted
         }
     }).then(() => {
+        onUpdate();
     }).catch(() => {
         toast.error('Error while updating.');
-    }).finally(() => { })
+    }).finally(() => {
+        setIsUpdating(false);
+     })
 };
 
 const removeItemFromList = (itemId) => {
@@ -84,4 +92,59 @@ const getTaskDetails = ({ setTaskDetails, taskId }) => {
         .finally(() => { })
 }
 
-export { getTodoList, addTasktoList, updatListItem, removeItemFromList, addBackgroundImage, getBackgroundImageUrl, getTaskDetails };
+const sendNotification = (task)=> {
+    // console.log('Notification')
+    // if ('Notification' in window) {
+    //   if (Notification.permission === 'granted') {
+    //     new Notification(task.value);
+    //   } else if (Notification.permission !== 'denied') {
+    //     Notification.requestPermission().then(permission => {
+    //       if (permission === 'granted') {
+    //         new Notification(task.value);
+    //       }
+    //     });
+    //   }
+    // }
+}
+
+const handleNotification = (refresh, setRefresh)=>{
+    channel.bind('my-event', function (data) {
+        if (data.data.type === "change") {
+          console.log('CHANGE');
+          setRefresh(!refresh)
+        } else {
+          console.log('Notification')
+          // sendNotification(data.data);
+        }
+      });
+}
+
+const signInAction = (userid,password, userValidationUpdated, setUserValidationUpdated, setIsValidating)=>{
+    axios.post('/validate', {
+        data: {
+            userId: userid,
+            password:password
+        }
+    }).then( (response) => {
+        // Set an object to LocalStorage
+        const obj = response.data;
+        localStorage.setItem('todo-list', JSON.stringify(obj));
+        setUserValidationUpdated(!userValidationUpdated) 
+    }).catch(() => {   
+    }).finally(() => {
+        setIsValidating(false);
+    })
+}
+
+export { 
+    getTodoList, 
+    addTasktoList, 
+    updatListItem, 
+    removeItemFromList, 
+    addBackgroundImage, 
+    getBackgroundImageUrl, 
+    getTaskDetails,
+    sendNotification,
+    handleNotification,
+    signInAction
+};
