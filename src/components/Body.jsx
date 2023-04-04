@@ -5,6 +5,8 @@ import { getBackgroundImageUrl, getTodoList, handleNotification, removeItemFromL
 import Detailspage from "./Detailspage";
 import SignIn from "./SignIn";
 import { getToken } from "../helpers/actions";
+import AccessLog from "./AccessLog";
+import { getAddress } from "../helpers/external-request";
 
 function Body({ type, setType, userValidationUpdated, isValidUser, setUserValidationUpdated }) {
 
@@ -24,6 +26,18 @@ function Body({ type, setType, userValidationUpdated, isValidUser, setUserValida
         setList(updatedItems);
     }
 
+    const getLocation = () => {
+        console.log('GET LOCATION');
+        console.log('-----------------\n');
+
+        navigator.geolocation.getCurrentPosition(function (position) {
+            console.log(' latitude : ', position.coords.latitude);
+            console.log('longitude : ', position.coords.longitude);
+            getAddress(position.coords.latitude, position.coords.longitude);
+        });
+    }
+
+
     useEffect(() => {
         handleNotification(refresh, setRefresh);
     }, [refresh])
@@ -36,6 +50,7 @@ function Body({ type, setType, userValidationUpdated, isValidUser, setUserValida
 
     useEffect(() => {
         getBackgroundImageUrl(setBackgroundImageUrl);
+        getLocation();
     }, [])
 
     useEffect(() => {
@@ -154,6 +169,8 @@ function Body({ type, setType, userValidationUpdated, isValidUser, setUserValida
                 }}
                 setList={setList}
             />
+
+            <AccessLog />
         </>
     )
 }

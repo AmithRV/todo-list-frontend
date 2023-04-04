@@ -446,3 +446,23 @@ html {
 .sign-in-option-label{
   width:70px
 }
+
+.access-log-canvas{
+  border: 1px solid #d5bdbd78;
+  border-radius: 10px;
+  margin-top: 20px;
+  min-height: 50px;
+  max-height: 240px;
+  overflow: scroll;
+}
+
+.access-log{
+  border: 1px solid #eeeeee3b;
+  margin: 10px;
+  border-radius: 10px;
+  padding: 3px 5px;
+}
+
+.access-log-canvas{
+  scrollbar-width: none;
+}

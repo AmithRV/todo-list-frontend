@@ -31,7 +31,7 @@ const addTasktoList = (data, setType) => {
 
 const updatListItem = (itemId, isCompleted, onUpdate, setIsUpdating) => {
     setIsUpdating(true);
-    
+
     axios.patch('/update-item', {
         data: {
             id: itemId,
@@ -43,7 +43,7 @@ const updatListItem = (itemId, isCompleted, onUpdate, setIsUpdating) => {
         toast.error('Error while updating.');
     }).finally(() => {
         setIsUpdating(false);
-     })
+    })
 };
 
 const removeItemFromList = (itemId) => {
@@ -92,7 +92,7 @@ const getTaskDetails = ({ setTaskDetails, taskId }) => {
         .finally(() => { })
 }
 
-const sendNotification = (task)=> {
+const sendNotification = (task) => {
     // console.log('Notification')
     // if ('Notification' in window) {
     //   if (Notification.permission === 'granted') {
@@ -107,44 +107,46 @@ const sendNotification = (task)=> {
     // }
 }
 
-const handleNotification = (refresh, setRefresh)=>{
+const handleNotification = (refresh, setRefresh) => {
     channel.bind('my-event', function (data) {
         if (data.data.type === "change") {
-          console.log('CHANGE');
-          setRefresh(!refresh)
+            console.log('CHANGE');
+            setRefresh(!refresh)
         } else {
-          console.log('Notification')
-          // sendNotification(data.data);
+            console.log('Notification')
+            // sendNotification(data.data);
         }
-      });
+    });
 }
 
-const signInAction = (userid,password, userValidationUpdated, setUserValidationUpdated, setIsValidating)=>{
+const signInAction = (userid, password, userValidationUpdated, setUserValidationUpdated, setIsValidating) => {
     axios.post('/validate', {
         data: {
             userId: userid,
-            password:password
+            password: password
         }
-    }).then( (response) => {
+    }).then((response) => {
         // Set an object to LocalStorage
         const obj = response.data;
         localStorage.setItem('todo-list', JSON.stringify(obj));
-        setUserValidationUpdated(!userValidationUpdated) 
-    }).catch(() => {   
+        setUserValidationUpdated(!userValidationUpdated)
+    }).catch(() => {
     }).finally(() => {
         setIsValidating(false);
     })
 }
 
-export { 
-    getTodoList, 
-    addTasktoList, 
-    updatListItem, 
-    removeItemFromList, 
-    addBackgroundImage, 
-    getBackgroundImageUrl, 
+
+
+export {
+    getTodoList,
+    addTasktoList,
+    updatListItem,
+    removeItemFromList,
+    addBackgroundImage,
+    getBackgroundImageUrl,
     getTaskDetails,
     sendNotification,
     handleNotification,
-    signInAction
+    signInAction,
 };
