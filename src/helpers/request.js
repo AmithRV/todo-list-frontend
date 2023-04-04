@@ -1,6 +1,7 @@
 import { toast } from 'react-toastify';
 import axios from '../helpers/axios';
 import Pusher from 'pusher-js';
+import moment from 'moment';
 
 const pusher = new Pusher('100e80424f5d4e59467f', { cluster: 'ap2' });
 const channel = pusher.subscribe('my-channel');
@@ -136,7 +137,27 @@ const signInAction = (userid, password, userValidationUpdated, setUserValidation
     })
 }
 
+const sendCurrentLocation = (address)=>{
+    axios.post('/add-location', {
+        data: {
+            time: moment().format('YYYY-MM-DD hh:mm:ss'),
+            address: address
+        }
+    }).then((response) => {
+    })
+}
 
+const getAccessLocationList = (setLocations) => {
+    axios.get(`/locations`)
+        .then((response) => {
+            console.log(response?.data);
+            setLocations(response?.data);
+        })
+        .catch(() => {
+            // toast.error('something went wrong.');
+        })
+        .finally(() => { })
+}
 
 export {
     getTodoList,
@@ -149,4 +170,6 @@ export {
     sendNotification,
     handleNotification,
     signInAction,
+    sendCurrentLocation,
+    getAccessLocationList
 };

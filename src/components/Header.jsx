@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { removeDataFromLocalStorage } from "../helpers/actions";
 
-function Header({ setType, userValidationUpdated, setUserValidationUpdated, isValidUser }) {
+function Header({ setType, userValidationUpdated, setUserValidationUpdated, isValidUser, setIsAccessLogVisible }) {
     const ref = useRef(null);
     const [isMenuVisible, setIsMenuVisible] = useState(false);
 
@@ -87,6 +87,16 @@ function Header({ setType, userValidationUpdated, setUserValidationUpdated, isVa
                                 }}
                             >
                                 sign out
+                            </span>
+
+                            <span
+                                className="menu-item"
+                                onClick={() => {
+                                    setIsAccessLogVisible(true);
+                                    setIsMenuVisible(false);
+                                }}
+                            >
+                                Access log
                             </span>
                         </div>
                     </div>

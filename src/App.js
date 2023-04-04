@@ -11,6 +11,7 @@ function App() {
   const [type, setType] = useState('');
   const [userValidationUpdated, setUserValidationUpdated] = useState(false);
   const [isValidUser, setIsValidUser] = useState();
+  const [isAccessLogVisible, setIsAccessLogVisible] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -44,6 +45,7 @@ function App() {
         userValidationUpdated={userValidationUpdated}
         setUserValidationUpdated={setUserValidationUpdated}
         isValidUser={isValidUser}
+        setIsAccessLogVisible={setIsAccessLogVisible}
       />
 
       <Body
@@ -52,6 +54,8 @@ function App() {
         userValidationUpdated={userValidationUpdated}
         isValidUser={isValidUser}
         setUserValidationUpdated={setUserValidationUpdated}
+        isAccessLogVisible={isAccessLogVisible}
+        setIsAccessLogVisible={setIsAccessLogVisible}
       />
 
       <Footer />

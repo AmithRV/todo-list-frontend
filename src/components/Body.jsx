@@ -8,7 +8,7 @@ import { getToken } from "../helpers/actions";
 import AccessLog from "./AccessLog";
 import { getAddress } from "../helpers/external-request";
 
-function Body({ type, setType, userValidationUpdated, isValidUser, setUserValidationUpdated }) {
+function Body({ type, setType, userValidationUpdated, isValidUser, setUserValidationUpdated, isAccessLogVisible, setIsAccessLogVisible }) {
 
     const [list, setList] = useState([]);
     const [refresh, setRefresh] = useState(false);
@@ -27,16 +27,10 @@ function Body({ type, setType, userValidationUpdated, isValidUser, setUserValida
     }
 
     const getLocation = () => {
-        console.log('GET LOCATION');
-        console.log('-----------------\n');
-
         navigator.geolocation.getCurrentPosition(function (position) {
-            console.log(' latitude : ', position.coords.latitude);
-            console.log('longitude : ', position.coords.longitude);
             getAddress(position.coords.latitude, position.coords.longitude);
         });
     }
-
 
     useEffect(() => {
         handleNotification(refresh, setRefresh);
@@ -170,7 +164,12 @@ function Body({ type, setType, userValidationUpdated, isValidUser, setUserValida
                 setList={setList}
             />
 
-            <AccessLog />
+            <AccessLog
+                isVisible={isAccessLogVisible}
+                onClose={() => {
+                    setIsAccessLogVisible(false);
+                }} 
+            />
         </>
     )
 }
