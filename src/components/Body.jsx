@@ -102,7 +102,7 @@ function Body({ type, setType, userValidationUpdated, isValidUser, setUserValida
                                                     </label>
 
                                                     {
-                                                        (selectedItemIdForDelete === item?.id) ? (
+                                                        (selectedItemIdForDelete === item?._id) ? (
                                                             <div className="delete-action">
                                                                 <img
                                                                     src="./icons/check.svg"
