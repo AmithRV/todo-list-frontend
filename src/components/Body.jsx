@@ -86,7 +86,6 @@ function Body({ type, setType, userValidationUpdated, isValidUser, setUserValida
                                                         type="checkbox"
                                                         id="myCheckbox"
                                                         className="checkbox"
-                                                        // onChange={(e) => { updateArray(item?.id, item?.isCompleted) }}
                                                         checked={(item?.isCompleted) ? (item?.isCompleted) : ('')}
                                                         readOnly
                                                     />
@@ -121,7 +120,7 @@ function Body({ type, setType, userValidationUpdated, isValidUser, setUserValida
                                                             <img
                                                                 src="./icons/trash.svg"
                                                                 className="trash-icon action-icon"
-                                                                onClick={() => { setSelectedItemIdForDelete(item?.id) }}
+                                                                onClick={() => { setSelectedItemIdForDelete(item?._id) }}
                                                                 alt={'icon'}
                                                             />
                                                         )
