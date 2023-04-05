@@ -13,7 +13,7 @@ function Body({ type, setType, userValidationUpdated, isValidUser, setUserValida
     const [list, setList] = useState([]);
     const [refresh, setRefresh] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [selectedItemIdForDelete, setSelectedItemIdForDelete] = useState();
+    const [selectedItemIdForDelete, setSelectedItemIdForDelete] = useState('');
 
     const [taskId, setTaskId] = useState();
     const [isDetailsVisible, setIsDetailsVisible] = useState(false);
@@ -27,9 +27,13 @@ function Body({ type, setType, userValidationUpdated, isValidUser, setUserValida
     }
 
     const getLocation = () => {
-        navigator.geolocation.getCurrentPosition(function (position) {
+        navigator.geolocation.getCurrentPosition((position)=> {
             getAddress(position.coords.latitude, position.coords.longitude);
-        });
+        },
+      (error) => {
+        console.log(`Error getting location: ${error.message}`);
+      },
+      { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 });
     }
 
     useEffect(() => {
@@ -98,7 +102,7 @@ function Body({ type, setType, userValidationUpdated, isValidUser, setUserValida
                                                     </label>
 
                                                     {
-                                                        (selectedItemIdForDelete === item?.id) ? (
+                                                        (selectedItemIdForDelete === item?._id) ? (
                                                             <div className="delete-action">
                                                                 <img
                                                                     src="./icons/check.svg"

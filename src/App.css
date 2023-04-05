@@ -466,3 +466,7 @@ html {
 .access-log-canvas{
   scrollbar-width: none;
 }
+
+.access-log-canvas::-webkit-scrollbar {
+    display: none;
+}
