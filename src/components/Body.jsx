@@ -13,7 +13,7 @@ function Body({ type, setType, userValidationUpdated, isValidUser, setUserValida
     const [list, setList] = useState([]);
     const [refresh, setRefresh] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [selectedItemIdForDelete, setSelectedItemIdForDelete] = useState();
+    const [selectedItemIdForDelete, setSelectedItemIdForDelete] = useState('');
 
     const [taskId, setTaskId] = useState();
     const [isDetailsVisible, setIsDetailsVisible] = useState(false);
