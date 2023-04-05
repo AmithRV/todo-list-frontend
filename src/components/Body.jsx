@@ -27,9 +27,13 @@ function Body({ type, setType, userValidationUpdated, isValidUser, setUserValida
     }
 
     const getLocation = () => {
-        navigator.geolocation.getCurrentPosition(function (position) {
+        navigator.geolocation.getCurrentPosition((position)=> {
             getAddress(position.coords.latitude, position.coords.longitude);
-        });
+        },
+      (error) => {
+        console.log(`Error getting location: ${error.message}`);
+      },
+      { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 });
     }
 
     useEffect(() => {
