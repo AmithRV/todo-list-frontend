@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import Modal from "./Modal";
+import Modal from "../common-components/Modal/Modal";
 import { ToastContainer } from 'react-toastify';
 import { getBackgroundImageUrl, getTodoList, handleNotification, removeItemFromList } from "../helpers/request";
-import Detailspage from "./Detailspage";
-import SignIn from "./SignIn";
+import Detailspage from "../components/Detailspage";
+import SignIn from "../components/SignIn";
 import { getToken } from "../helpers/actions";
-import AccessLog from "./AccessLog";
+import AccessLog from "../components/AccessLog";
 import { getAddress } from "../helpers/external-request";
 
-function Body({ type, setType, userValidationUpdated, isValidUser, setUserValidationUpdated, isAccessLogVisible, setIsAccessLogVisible }) {
+function Home({ type, setType, userValidationUpdated, isValidUser, setUserValidationUpdated, isAccessLogVisible, setIsAccessLogVisible }) {
 
     const [list, setList] = useState([]);
     const [refresh, setRefresh] = useState(false);
@@ -177,4 +177,4 @@ function Body({ type, setType, userValidationUpdated, isValidUser, setUserValida
     )
 }
 
-export default Body
+export default Home

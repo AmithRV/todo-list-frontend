@@ -6,8 +6,10 @@ function AccessLog({ isVisible, onClose }) {
     const [locations, setLocations] = useState([]);
 
     useEffect(() => {
-        getAccessLocationList(setLocations);
-    }, [])
+        if(isVisible){
+            getAccessLocationList(setLocations);
+        }
+    }, [isVisible])
 
     if (isVisible) {
         return (

@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import Body from './components/Body';
+import Home from './pages/Home';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import 'react-toastify/dist/ReactToastify.css';
 import { getToken } from './helpers/actions';
+import { Route, Routes } from 'react-router-dom';
+import Trades from './pages/Trades';
+import Explore from './pages/Explore';
 
 function App() {
 
@@ -30,35 +33,59 @@ function App() {
   useEffect(() => {
     let token = getToken()?.token;
 
-    if(token){
+    if (token) {
       setIsValidUser(true)
-    }else{
+    } else {
       setIsValidUser(false);
     }
   }, [userValidationUpdated])
 
   return (
     <div className="app">
-      
-      <Header
-        setType={setType}
-        userValidationUpdated={userValidationUpdated}
-        setUserValidationUpdated={setUserValidationUpdated}
-        isValidUser={isValidUser}
-        setIsAccessLogVisible={setIsAccessLogVisible}
-      />
 
-      <Body
-        type={type}
-        setType={setType}
-        userValidationUpdated={userValidationUpdated}
-        isValidUser={isValidUser}
-        setUserValidationUpdated={setUserValidationUpdated}
-        isAccessLogVisible={isAccessLogVisible}
-        setIsAccessLogVisible={setIsAccessLogVisible}
-      />
+<Header
+          setType={setType}
+          userValidationUpdated={userValidationUpdated}
+          setUserValidationUpdated={setUserValidationUpdated}
+          isValidUser={isValidUser}
+          setIsAccessLogVisible={setIsAccessLogVisible}
+        />
+
+      <Routes>
+
+        <Route
+          exact path="/"
+          element={
+            <Home
+              type={type}
+              setType={setType}
+              userValidationUpdated={userValidationUpdated}
+              isValidUser={isValidUser}
+              setUserValidationUpdated={setUserValidationUpdated}
+              isAccessLogVisible={isAccessLogVisible}
+              setIsAccessLogVisible={setIsAccessLogVisible}
+            />
+          }
+        />
+
+        <Route
+          exact path="/trades"
+          element={
+            <Trades />
+          }
+        />
+
+        <Route
+          exact path="/explore"
+          element={
+            <Explore />
+          }
+        />
+
+      </Routes>
 
       <Footer />
+
     </div>
   );
 }

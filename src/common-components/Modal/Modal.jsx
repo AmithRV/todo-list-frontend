@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { addBackgroundImage, addTasktoList } from "../helpers/request";
+import { addBackgroundImage, addTasktoList } from "../../helpers/request";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 

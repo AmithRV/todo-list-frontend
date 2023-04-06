@@ -60,6 +60,12 @@ function Header({ setType, userValidationUpdated, setUserValidationUpdated, isVa
 
                             <span
                                 className="menu-item"
+                            >
+                                Connections : 4
+                            </span>
+
+                            <span
+                                className="menu-item"
                                 onClick={() => {
                                     setType('add');
                                     setIsMenuVisible(false);
@@ -75,7 +81,7 @@ function Header({ setType, userValidationUpdated, setUserValidationUpdated, isVa
                                     setIsMenuVisible(false);
                                 }}
                             >
-                                Change background
+                                Background
                             </span>
 
                             <span
