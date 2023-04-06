@@ -47,16 +47,16 @@ function Header({ setType, userValidationUpdated, setUserValidationUpdated, isVa
                 (isMenuVisible && isValidUser) ? (
                     <div className="menu-wrap" ref={ref}>
                         <div className="menu">
-                            <span
-                                className="menu-item"
-                                onClick={() => {
-                                    setType('decrypt');
-                                    setIsMenuVisible(false);
-                                }}
-                                title='press +'
-                            >
-                                Decrypt
-                            </span>
+//                             <span
+//                                 className="menu-item"
+//                                 onClick={() => {
+//                                     setType('decrypt');
+//                                     setIsMenuVisible(false);
+//                                 }}
+//                                 title='press +'
+//                             >
+//                                 Decrypt
+//                             </span>
 
                             <span
                                 className="menu-item"
@@ -81,22 +81,22 @@ function Header({ setType, userValidationUpdated, setUserValidationUpdated, isVa
                             <span
                                 className="menu-item"
                                 onClick={() => {
+                                    setIsAccessLogVisible(true);
+                                    setIsMenuVisible(false);
+                                }}
+                            >
+                                Access log
+                            </span>
+
+                            <span
+                                className="menu-item"
+                                onClick={() => {
                                     setUserValidationUpdated(!userValidationUpdated)
                                     removeDataFromLocalStorage();
                                     setIsMenuVisible(false);
                                 }}
                             >
                                 sign out
-                            </span>
-
-                            <span
-                                className="menu-item"
-                                onClick={() => {
-                                    setIsAccessLogVisible(true);
-                                    setIsMenuVisible(false);
-                                }}
-                            >
-                                Access log
                             </span>
                         </div>
                     </div>
