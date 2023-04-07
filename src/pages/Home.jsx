@@ -59,7 +59,10 @@ function Home({ type, setType, userValidationUpdated, isValidUser, setUserValida
         <>
             <ToastContainer pauseOnHover={false} />
 
-            <div className="body-wrap" style={{ backgroundImage: `url(${backgroundImageUrl})` }}>
+            <div 
+className="body-wrap" 
+style={{ backgroundImage: `url(${backgroundImageUrl})`, backgroundRepeat: 'no-repeat',backgroundSize: '100% 100%', backgroundPosition: 'center' }}
+>
 
                 <div className="body">
                     <div className="cardlist">
