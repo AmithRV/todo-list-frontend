@@ -58,11 +58,11 @@ function Header({ setType, userValidationUpdated, setUserValidationUpdated, isVa
                                 Decrypt
                             </span> */}
 
-                            <span
+                            {/*  <span
                                 className="menu-item"
                             >
                                 Connections : 4
-                            </span>
+                            </span>*/}
 
                             <span
                                 className="menu-item"
